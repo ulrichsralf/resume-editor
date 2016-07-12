@@ -45,20 +45,24 @@ input {
 #sidebar #panel .inner {
 	float: right;
 	height: 170px;
-	padding: 16px 20px 0;
+	padding-top: 16px;
 	position: relative;
 	width: 280px;
 }
 #sidebar .actions {
 	overflow: hidden;
 }
-#sidebar .actions #export {
-	margin-right: 4px;
-}
 #sidebar .actions #export:before {
 	content: "\f019";
 	font: 12px FontAwesome;
 	margin-top: 5px;
+	padding-right: 4px;
+}
+#sidebar .actions #reset:before {
+	content: "\f021";
+	font: 12px FontAwesome;
+	margin-top: 5px;
+	padding-right: 4px;
 }
 #sidebar .theme {
 	color: #999;
