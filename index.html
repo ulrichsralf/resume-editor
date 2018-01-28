@@ -19,12 +19,13 @@
 	<aside id="sidebar">
 		<div id="panel">
 			<div class="inner">
-			<div class="actions">
-				<span><img src="images/blockcv.png" width="200npm "/></span>
-				<button id="export" class="button" data-placement="bottom" title="Download JSON"></button>
-				<button id="reset" class="button hidden">Reset</button>
-				<button id="clear" class="button">Clear</button>
-			</div>
+				<div class="actions">
+                    <span><img src="images/blockcv.png" width="200npm "/></span>
+                    <button id="export" class="button" data-placement="bottom" title="Download JSON">Export</button>
+					<button id="clear" class="button">Clear</button>
+					<button id="import" class="button">Import</button>
+					<button id="reset" class="button">Reset</button>
+				</div>
 			<div class="theme">
 				Current theme:
 				<strong id="theme-current"></strong>
@@ -112,6 +113,8 @@
 			</div>
 		</div>
 	</div>
+
+	<input type="file" style="display:none" id="file_upload" />
 
 	<script src="js/libs.min.js"></script>
 	<script src="json-builder/src/builder.js"></script>

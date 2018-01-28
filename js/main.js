@@ -1,13 +1,16 @@
 // Global by intention.
 var builder;
 
+var default_resume_file = "json/resume.json";
+var imported_resume_file = "";
+
 jQuery(document).ready(function($) {
 	var form = $("#form");
 	builder = new Builder(form);
 
 	$.getJSON("json/schema.json", function(data) {
 		builder.init(data);
-		reset();
+		reset(default_resume_file);
 	});
 
 	var preview = $("#preview");
@@ -60,15 +63,34 @@ jQuery(document).ready(function($) {
 		container: "body"
 	});
 
+	$("#import").on("click", function() {
+		$("#file_upload").val(null);
+		$("#file_upload").click();
+	});
+
+	$('input[type=file]').change(function(event) {
+		var files = document.getElementById('file_upload').files;
+
+		if(files && files.length > 0 && files[0].name.length > 0){
+			var fileName = files[0].name;
+			files=[];
+			if (confirm("Are you sure?\n\nThis will remove any edits and change entries to the selected resume file.")) {
+				importResume(fileName);
+			}
+		}
+		else {
+			alert("No file selected");
+		}
+	});
 
 	$("#reset").on("click", function() {
-		if (confirm("Are you sure?")) {
-			reset();
+		if (confirm("Are you sure?\n\nThis will remove any edits and reset to the default resume file.")) {
+			reset(default_resume_file);
 		}
 	});
 
 	$("#clear").on("click", function() {
-		if (confirm("Are you sure?")) {
+		if (confirm("Are you sure?\n\nThis will revert the editor to a blank resume file.")) {
 			clear();
 		}
 	});
@@ -138,10 +160,15 @@ jQuery(document).ready(function($) {
 	});
 });
 
-function reset() {
-	$.getJSON("json/resume.json", function(data) {
+function reset(resume_file) {
+	$.getJSON(resume_file, function(data) {
 		builder.setFormValues(data);
 	});
+}
+
+function importResume(fileName) {
+	imported_resume_file = "json/" + fileName;
+	reset(imported_resume_file);
 }
 
 function clear() {
